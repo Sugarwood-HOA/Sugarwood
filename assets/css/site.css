@@ -616,7 +616,7 @@ ol {
 .page-hero {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(4rem, 8vw, 7.5rem);
+  padding-block: clamp(2.4rem, 4.8vw, 4.5rem);
   color: var(--white);
   background: var(--navy-900);
 }
@@ -635,6 +635,64 @@ ol {
 .page-hero h1 {
   max-width: 14ch;
   color: var(--white);
+}
+
+.schedule-date {
+  font: inherit;
+  white-space: nowrap;
+}
+
+.farragut-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2rem;
+}
+
+.farragut-feature-mark {
+  display: block;
+  padding: 1rem;
+  background: var(--navy-900);
+  border-radius: var(--radius-md);
+}
+
+.farragut-feature-mark img {
+  display: block;
+  width: min(16rem, 30vw);
+  height: auto;
+}
+
+.amenities-layout {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.amenities-media {
+  width: min(80%, 56rem);
+  justify-self: center;
+}
+
+.amenities-media img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.stingrays-logo-wrap {
+  display: grid;
+  min-height: 18rem;
+  place-items: center;
+  padding: 1.5rem;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.stingrays-logo-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 25rem;
+  object-fit: contain;
 }
 
 .page-lead {
@@ -1218,6 +1276,15 @@ ol {
 
   .split-media {
     order: -1;
+  }
+
+  .amenities-media {
+    width: min(80%, 32rem);
+    justify-self: center;
+  }
+
+  .farragut-feature {
+    grid-template-columns: 1fr;
   }
 
   .footer-grid {
