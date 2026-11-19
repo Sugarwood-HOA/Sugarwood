@@ -24,6 +24,65 @@
   --max-width: 76rem;
 }
 
+/* Seasonal visual layers. Content stays shared across every theme. */
+body[data-theme="autumn"] {
+  --navy-950: #352017;
+  --navy-900: #59321e;
+  --navy-800: #7c4725;
+  --blue-700: #8f4d22;
+  --teal-600: #a65b20;
+  --teal-500: #bd6f2b;
+  --aqua-100: #f6e5ce;
+  --cream-100: #fffaf3;
+  --cream-200: #f5eadc;
+  --gold-500: #b65d25;
+  --gold-300: #efb061;
+  --ink: #412c21;
+  --muted: #765a47;
+  --line: #e7d5c3;
+  --shadow-sm: 0 8px 24px rgba(76, 40, 21, 0.1);
+  --shadow-lg: 0 24px 70px rgba(76, 40, 21, 0.2);
+}
+
+body[data-theme="winter"] {
+  --navy-950: #102b43;
+  --navy-900: #193f5d;
+  --navy-800: #285778;
+  --blue-700: #316a8c;
+  --teal-600: #3d7d92;
+  --teal-500: #559bad;
+  --aqua-100: #e1f0f4;
+  --cream-100: #f6fafc;
+  --cream-200: #e9f1f5;
+  --gold-500: #a87535;
+  --gold-300: #d8b56e;
+  --ink: #1d384d;
+  --muted: #587082;
+  --line: #d5e1e7;
+  --shadow-sm: 0 8px 24px rgba(16, 43, 67, 0.1);
+  --shadow-lg: 0 24px 70px rgba(16, 43, 67, 0.2);
+}
+
+.season-notice {
+  color: var(--navy-950);
+  background: var(--aqua-100);
+  border-bottom: 1px solid var(--line);
+}
+
+.season-notice .container {
+  display: flex;
+  gap: 0.75rem 1rem;
+  align-items: baseline;
+  padding-block: 0.7rem;
+  font-size: 0.92rem;
+}
+
+.season-notice strong {
+  color: var(--navy-900);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.03rem;
+}
+
 *,
 *::before,
 *::after {
@@ -267,16 +326,8 @@ ol {
   background-size: cover;
 }
 
-.hero::after {
-  position: absolute;
-  right: -7rem;
-  bottom: -8rem;
-  width: 24rem;
-  height: 24rem;
-  background: rgba(10, 163, 170, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 50%;
-  content: "";
+body[data-theme="autumn"] .hero {
+  background-image: linear-gradient(90deg, rgba(54, 25, 10, 0.86) 0%, rgba(96, 51, 17, 0.54) 52%, rgba(151, 85, 24, 0.12) 100%), var(--hero-image);
 }
 
 .hero-inner {
@@ -534,6 +585,14 @@ ol {
   box-shadow: var(--shadow-lg);
 }
 
+/* Home-page seasonal portrait: show the top seven-eighths of the 1:2 source. */
+.split-media img[data-seasonal-home-image] {
+  height: auto;
+  aspect-ratio: 4 / 7;
+  object-fit: cover;
+  object-position: right top;
+}
+
 .split-media::after {
   position: absolute;
   z-index: -1;
@@ -616,7 +675,7 @@ ol {
 .page-hero {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(2.4rem, 4.8vw, 4.5rem);
+  padding-block: clamp(0.8rem, 1.5vw, 1.25rem);
   color: var(--white);
   background: var(--navy-900);
 }
@@ -633,8 +692,11 @@ ol {
 }
 
 .page-hero h1 {
-  max-width: 14ch;
+  max-width: 11ch;
+  margin-bottom: 0.12em;
   color: var(--white);
+  font-size: clamp(1.85rem, 3.5vw, 3.25rem);
+  line-height: 1.04;
 }
 
 .schedule-date {
@@ -696,14 +758,15 @@ ol {
 }
 
 .page-lead {
-  max-width: 44rem;
+  max-width: 34rem;
   margin-bottom: 0;
   color: #d9e8ec;
-  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-size: clamp(0.88rem, 1.25vw, 0.98rem);
+  line-height: 1.38;
 }
 
 .breadcrumb {
-  margin-bottom: 1rem;
+  margin-bottom: 0.22rem;
   color: #a9c5cd;
   font-size: 0.78rem;
   font-weight: 750;
@@ -772,6 +835,8 @@ ol {
   transform: translateY(-2px);
 }
 
+.document-card--actions:hover { transform: none; }
+
 .document-card strong {
   display: block;
   margin-bottom: 0.35rem;
@@ -797,6 +862,35 @@ ol {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+
+.document-meta--links a { padding: 0.35rem 0.55rem; color: var(--teal-600); border: 1px solid currentColor; border-radius: 999px; text-decoration: none; }
+.document-meta--links a:hover,
+.document-meta--links a:focus-visible { color: var(--white); background: var(--teal-600); }
+
+/* TEST-ONLY browser-generated reservation form. */
+.reservation-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.42fr); gap: 1.5rem; align-items: start; }
+.reservation-form, .reservation-output { padding: clamp(1.2rem, 3vw, 2rem); background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+.reservation-pdf-link { margin: 1.25rem 0 1.75rem; text-align: center; font-size: 1.12rem; font-weight: 700; }
+.reservation-demo { display: flex; gap: 1rem; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; padding: 1rem; background: var(--aqua-100); border: 1px dashed var(--teal-600); border-radius: var(--radius-md); }
+.reservation-demo small { display: block; color: var(--muted); }
+.reservation-form fieldset { margin: 0 0 1.5rem; padding: 0; border: 0; }
+.reservation-form legend { width: 100%; margin-bottom: 1rem; padding-bottom: 0.45rem; color: var(--navy-900); border-bottom: 1px solid var(--line); font-family: Georgia, "Times New Roman", serif; font-size: 1.3rem; font-weight: 700; }
+.reservation-fields, .reservation-checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; }
+.reservation-checks { gap: 0.6rem 1rem; margin-bottom: 1rem; }
+.reservation-check, .reservation-acknowledgment { display: flex; gap: 0.65rem; align-items: flex-start; }
+.reservation-check input, .reservation-acknowledgment input { width: 1.1rem; height: 1.1rem; margin-top: 0.25rem; flex: 0 0 auto; }
+.reservation-acknowledgment { margin-bottom: 0.85rem; }
+.reservation-note { margin-bottom: 1rem; padding: 1rem; background: var(--warning-bg); border-left: 4px solid var(--warning-border); border-radius: var(--radius-sm); }
+.reservation-terms { margin-bottom: 1rem; padding: 1rem 1rem 1rem 1.25rem; background: var(--warning-bg); border-left: 4px solid var(--warning-border); border-radius: var(--radius-sm); }
+.reservation-terms ol { margin: 0; padding-left: 1.35rem; }
+.reservation-terms li + li { margin-top: 0.75rem; }
+.reservation-output { position: sticky; top: 1rem; }
+.reservation-output[hidden] { display: none; }
+.reservation-output pre { overflow: auto; max-height: 34rem; padding: 1rem; white-space: pre-wrap; color: var(--ink); background: var(--cream-100); border: 1px solid var(--line); border-radius: var(--radius-sm); font: 0.83rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; }
+.reservation-actions { display: flex; flex-wrap: wrap; gap: 0.65rem; }
+@media (max-width: 52rem) { .reservation-layout { grid-template-columns: 1fr; } .reservation-output { position: static; } }
+@media (max-width: 36rem) { .reservation-fields, .reservation-checks { grid-template-columns: 1fr; } .reservation-demo { align-items: stretch; flex-direction: column; } }
+@media print { body.reservation-printing > *:not(.reservation-print-sheet) { display: none !important; } .reservation-print-sheet { display: block !important; color: #000; font: 12pt/1.45 Arial, sans-serif; } }
 
 .schedule-grid {
   display: grid;
@@ -914,7 +1008,38 @@ ol {
 }
 
 .contact-form-layout {
-  align-items: start;
+  display: block;
+}
+
+.contact-form-intro {
+  max-width: 760px;
+  margin-bottom: 1.5rem;
+}
+
+.contact-form-embed {
+  overflow: hidden;
+  width: 100%;
+  min-height: 1500px;
+  border: 1px solid rgba(7, 29, 46, 0.14);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 16px 42px rgba(7, 29, 46, 0.1);
+}
+
+.contact-form-embed iframe {
+  display: block;
+  width: 100%;
+  height: 1500px;
+  border: 0;
+}
+
+.contact-form-fallback {
+  margin: 1rem 0 0;
+  text-align: center;
+}
+
+.contact-grid-after-form {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
 }
 
 .contact-form {
@@ -1336,6 +1461,10 @@ ol {
     background-position: 60% center;
   }
 
+  body[data-theme="autumn"] .hero {
+    background-image: linear-gradient(rgba(67, 31, 12, 0.72), rgba(91, 47, 16, 0.8)), var(--hero-image);
+  }
+
   .hero-inner {
     padding-block: 4rem 6rem;
   }
@@ -1410,6 +1539,20 @@ ol {
   .schedule-card th {
     padding-bottom: 0;
     border-bottom: 0;
+  }
+
+  .contact-form-embed,
+  .contact-form-embed iframe {
+    min-height: 1850px;
+    height: 1850px;
+  }
+}
+
+@media (max-width: 350px) {
+  .contact-form-embed,
+  .contact-form-embed iframe {
+    min-height: 2050px;
+    height: 2050px;
   }
 }
 
